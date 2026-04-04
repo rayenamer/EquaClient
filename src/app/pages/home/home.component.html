@@ -1,0 +1,306 @@
+<!-- Loading Screen -->
+<div class="loading" [class.hide]="!loading">
+  <div class="spinner"></div>
+</div>
+
+<!-- Header -->
+<header class="page-header">
+  <div class="header-container">
+    <a href="/" class="logo">EQUA</a>
+    <button type="button" class="header-burger" aria-label="Menu" (click)="toggleMobileMenu()" [class.open]="mobileMenuOpen">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav-links" [class.open]="mobileMenuOpen">
+      <a href="#" (click)="scrollTo('token-intro'); $event.preventDefault()">Accueil</a>
+      <a href="#" (click)="scrollTo('token-intro'); $event.preventDefault()">Token</a>
+      <a href="#" (click)="scrollTo('how-it-works'); $event.preventDefault()">Services</a>
+      <a href="#" (click)="scrollTo('faq'); $event.preventDefault()">FAQ</a>
+      <a href="#" (click)="scrollTo('contact-cta'); $event.preventDefault()">Contact</a>
+    </nav>
+    <div class="header-cta">
+      <a href="#" class="btn btn-primary">Connexion</a>
+      <a href="#" class="btn btn-secondary">S'inscrire</a>
+    </div>
+  </div>
+</header>
+
+<!-- Logo loop : juste sous le header -->
+<section class="logo-loop-section">
+  <app-logo-loop
+    [speed]="100"
+    direction="left"
+    [logoHeight]="32"
+    [gap]="40"
+    [pauseOnHover]="true"
+    [fadeOut]="true"
+    [fadeOutColor]="'#0a0a12'"
+    [scaleOnHover]="true"
+  ></app-logo-loop>
+</section>
+
+<!-- Section token : fond glitch sur toute la section, description à gauche (lisible), token 3D à droite -->
+<section class="token-section" id="token-section">
+  <app-letter-glitch
+    class="token-section-glitch token-section-glitch-full"
+    [glitchColors]="glitchColors"
+    [glitchSpeed]="50"
+    [outerVignette]="true"
+    [centerVignette]="false"
+    [smooth]="true"
+  ></app-letter-glitch>
+  <div class="token-section-content">
+    <div class="token-section-left">
+      <p class="token-section-desc">Accédez au token EQUA et aux services décentralisés en quelques clics.</p>
+      <div class="token-section-cta">
+        <a href="#" class="btn btn-primary" (click)="scrollTo('token-intro'); $event.preventDefault()">Découvrir le token</a>
+        <a href="#" class="btn btn-secondary" (click)="scrollTo('how-it-works'); $event.preventDefault()">Comment ça marche</a>
+      </div>
+    </div>
+    <div class="token-section-right">
+      <canvas #canvas></canvas>
+    </div>
+  </div>
+</section>
+
+<!-- Présentation du token EQUA -->
+<section class="token-intro-section" id="token-intro">
+  <div class="token-intro-container">
+    <h2 class="token-intro-title">Le token EQUA</h2>
+    <p class="token-intro-tagline">Finance Without Barriers</p>
+    <p class="token-intro-desc">
+      EQUA est un token conçu pour rendre la finance décentralisée accessible à tous.
+      Transparent, sécurisé et simple d’usage, il s’intègre dans un écosystème qui vise à réduire les barrières d’accès aux services financiers.
+    </p>
+    <div class="token-intro-stack-wrap">
+      <app-feature-stack
+        [sensitivity]="180"
+        [sendToBackOnClick]="true"
+        [autoplay]="true"
+        [autoplayDelay]="4000"
+        [pauseOnHover]="true"
+      ></app-feature-stack>
+    </div>
+  </div>
+</section>
+
+<!-- Autres tokens du marché -->
+<section class="tokens-market-section">
+  <h2 class="tokens-section-title">Tokens du marché</h2>
+  <app-tokens-grid
+    [columns]="3"
+    [rows]="2"
+    [radius]="300"
+  ></app-tokens-grid>
+</section>
+
+<!-- Chiffres clés -->
+<section class="stats-section" #statsSection>
+  <div class="stats-container">
+    @for (stat of stats; track stat.label) {
+      <div class="stat-item">
+        <span class="stat-value">{{ getStatDisplayText(stat) }}</span>
+        <span class="stat-label">{{ stat.label }}</span>
+      </div>
+    }
+  </div>
+</section>
+
+<!-- Comment ça marche -->
+<section class="how-section" id="how-it-works">
+  <h2 class="section-title">Comment ça marche</h2>
+  <div class="how-container">
+    <div class="how-step">
+      <span class="how-num">1</span>
+      <h3 class="how-title">Créez un compte</h3>
+      <p class="how-text">Inscription simple et rapide avec votre email ou portefeuille.</p>
+    </div>
+    <div class="how-step">
+      <span class="how-num">2</span>
+      <h3 class="how-title">Obtenez des EQUA</h3>
+      <p class="how-text">Achetez ou recevez des tokens EQUA sur notre plateforme.</p>
+    </div>
+    <div class="how-step">
+      <span class="how-num">3</span>
+      <h3 class="how-title">Utilisez les services</h3>
+      <p class="how-text">Paiements, transferts et services décentralisés en un clic.</p>
+    </div>
+    <div class="how-step">
+      <span class="how-num">4</span>
+      <h3 class="how-title">Restez en contrôle</h3>
+      <p class="how-text">Vos actifs, votre portefeuille, une totale transparence.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Prix EQUA -->
+<section class="price-section" id="price">
+  <div class="price-container">
+    <div class="price-left">
+      <div class="price-main">
+        <div class="price-value">1,00&nbsp;€</div>
+        <div class="price-change">0,0&nbsp;% (24h)</div>
+      </div>
+      <button type="button" class="price-why-btn">
+        Pourquoi le prix d'EQUA est-il en hausse ?
+      </button>
+
+      <div class="price-stats-grid">
+        <div class="price-stat-card">
+          <span class="stat-label">Cap. Marché</span>
+          <span class="stat-value">120,0&nbsp;M&nbsp;€</span>
+          <span class="stat-tag">stable</span>
+        </div>
+        <div class="price-stat-card">
+          <span class="stat-label">Volume (24h)</span>
+          <span class="stat-value">8,2&nbsp;M&nbsp;€</span>
+          <span class="stat-tag positive">+1,2&nbsp;%</span>
+        </div>
+        <div class="price-stat-card">
+          <span class="stat-label">Vol/Market Cap</span>
+          <span class="stat-value">6,8&nbsp;%</span>
+        </div>
+        <div class="price-stat-card">
+          <span class="stat-label">FDV</span>
+          <span class="stat-value">120,0&nbsp;M&nbsp;€</span>
+        </div>
+        <div class="price-stat-card">
+          <span class="stat-label">Offre totale</span>
+          <span class="stat-value">120,0&nbsp;M&nbsp;EQUA</span>
+        </div>
+        <div class="price-stat-card">
+          <span class="stat-label">Offre en circulation</span>
+          <span class="stat-value">118,5&nbsp;M&nbsp;EQUA</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="price-right">
+      <div class="price-chart-header">
+        <div class="price-chart-tabs">
+          <button type="button" class="tab active">Prix</button>
+          <button type="button" class="tab">Cap. Marché</button>
+          <button type="button" class="tab">TradingView</button>
+        </div>
+        <div class="price-chart-controls">
+          <button type="button" class="chip active">24h</button>
+          <button type="button" class="chip">1W</button>
+          <button type="button" class="chip">1M</button>
+          <button type="button" class="chip">1Y</button>
+          <button type="button" class="chip">Tout</button>
+        </div>
+      </div>
+
+      <app-price-chart></app-price-chart>
+    </div>
+  </div>
+</section>
+
+<!-- Marchés EQUA -->
+<app-markets-table />
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <h2 class="section-title">Questions fréquentes</h2>
+  <div class="faq-container">
+    <div class="faq-item" [class.open]="faqOpen === 0">
+      <button type="button" class="faq-question" (click)="toggleFaq(0)">
+        Qu'est-ce qu'EQUA ?
+      </button>
+      <div class="faq-answer">
+        <p>EQUA est un token et un écosystème de services financiers décentralisés, conçu pour rendre la finance accessible à tous, partout.</p>
+      </div>
+    </div>
+    <div class="faq-item" [class.open]="faqOpen === 1">
+      <button type="button" class="faq-question" (click)="toggleFaq(1)">
+        Comment acheter le token EQUA ?
+      </button>
+      <div class="faq-answer">
+        <p>Après création de compte, vous pouvez obtenir des EQUA via notre plateforme, par carte ou par virement, ou sur des échanges partenaires.</p>
+      </div>
+    </div>
+    <div class="faq-item" [class.open]="faqOpen === 2">
+      <button type="button" class="faq-question" (click)="toggleFaq(2)">
+        Est-ce sécurisé ?
+      </button>
+      <div class="faq-answer">
+        <p>Oui. Nous utilisons les standards de la blockchain et des bonnes pratiques pour protéger les fonds et les données des utilisateurs.</p>
+      </div>
+    </div>
+    <div class="faq-item" [class.open]="faqOpen === 3">
+      <button type="button" class="faq-question" (click)="toggleFaq(3)">
+        Où est disponible EQUA ?
+      </button>
+      <div class="faq-answer">
+        <p>EQUA est accessible dans de nombreux pays. Consultez la section Documentation pour la liste des juridictions supportées.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA avant footer -->
+<section class="cta-banner" id="contact-cta">
+  <div class="cta-banner-inner">
+    <h2 class="cta-banner-title">Prêt à commencer ?</h2>
+    <p class="cta-banner-text">Rejoignez l'écosystème EQUA et accédez à la finance sans barrières.</p>
+    <a href="#" class="btn btn-primary btn-lg">Rejoindre EQUA</a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="page-footer">
+  <div class="footer-container">
+    <div class="footer-brand">
+      <a href="/" class="footer-logo">EQUA</a>
+      <p class="footer-tagline">Finance Without Barriers</p>
+      <div class="footer-social">
+        <a href="#" aria-label="Twitter">Twitter</a>
+        <a href="#" aria-label="LinkedIn">LinkedIn</a>
+        <a href="#" aria-label="Discord">Discord</a>
+        <a href="#" aria-label="Telegram">Telegram</a>
+      </div>
+    </div>
+    <div class="footer-links">
+      <div class="footer-col">
+        <h4>Produit</h4>
+        <a href="#">Token</a>
+        <a href="#">Services</a>
+        <a href="#">Documentation</a>
+      </div>
+      <div class="footer-col">
+        <h4>Ressources</h4>
+        <a href="#">Blog</a>
+        <a href="#">FAQ</a>
+        <a href="#">Support</a>
+      </div>
+      <div class="footer-col">
+        <h4>Légal</h4>
+        <a href="#">Mentions légales</a>
+        <a href="#">CGU</a>
+        <a href="#">Confidentialité</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="mailto:contact@equa.io">contact&#64;equa.io</a>
+      </div>
+    </div>
+  </div>
+  <!-- Newsletter -->
+  <div class="footer-newsletter">
+    <div class="footer-newsletter-inner">
+      <h4>Restez informé</h4>
+      <p>Recevez les actualités et les nouveautés EQUA.</p>
+      <form class="newsletter-form" (ngSubmit)="onNewsletterSubmit($event)">
+        <input type="email" placeholder="Votre email" [(ngModel)]="newsletterEmail" name="newsletterEmail" class="newsletter-input" required />
+        <button type="submit" class="btn btn-primary">S'inscrire</button>
+      </form>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; {{ currentYear }} EQUA. Tous droits réservés.</p>
+  </div>
+</footer>
+
+<!-- Retour en haut -->
+<button type="button" class="back-to-top" [class.visible]="showBackToTop" (click)="scrollToTop()" aria-label="Retour en haut">
+  ↑
+</button>
